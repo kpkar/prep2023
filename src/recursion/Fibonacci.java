@@ -10,14 +10,20 @@ public class Fibonacci {
 
     static HashMap<Integer, Integer> map = new HashMap<>();
     public static void main( String args[] ) {
-        int n = 9;
-        fibonacci(n);
+        int n = 10;
+        /*fibonacci(n);
         System.out.println(map.size());
         for(int i: map.values()) {
             System.out.println(i);
+        }*/
+
+        for(int i = 0; i < n; i++ ) {
+            int fibNum = fibonacciDP(i);
+            System.out.print(fibNum + " " );
         }
     }
 
+    // 2^n time complexity and o(n) space complexity
     private static int fibonacci(int n) {
         if(n < 0) {
             return -1;
@@ -32,12 +38,23 @@ public class Fibonacci {
             return 1;
         }
         int fibNum = fibonacci(n -1) + fibonacci(n-2) ;
-       // System.out.println("n is " + n + " " + " fibNum is " + fibNum);
         if(map.get(n) == null)
         {
             map.put(n, fibNum);
-         //   System.out.println("Am here");
         }
         return fibNum;
+    }
+
+    private static int fibonacciDP(int n) {
+
+        int f[] = new int[n + 2];
+
+        f[0] = 0;
+        f[1] = 1;
+
+        for(int i = 2; i <= n; i++) {
+            f[i] = f[i-1] + f[i-2];
+        }
+        return f[n];
     }
 }
